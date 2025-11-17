@@ -6,6 +6,7 @@ set -ouex pipefail
 dnf install -y sudo \
     NetworkManager \
     firewalld \
+    openssh-server \
     container-selinux \
     selinux-policy-base \
     https://rpm.rancher.io/k3s/latest/common/centos/9/noarch/k3s-selinux-1.6-1.el9.noarch.rpm
