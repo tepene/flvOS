@@ -3,22 +3,22 @@
 set -ouex pipefail
 
 ### Install packages
+dnf install -y sudo \
+    NetworkManager \
+    firewalld \
+    container-selinux \
+    selinux-policy-base \
+    https://rpm.rancher.io/k3s/latest/common/centos/9/noarch/k3s-selinux-1.6-1.el9.noarch.rpm
 
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
+### Install K3s 
+curl -sfL https://get.k3s.io | INSTALL_K3S_SKIP_ENABLE="true" \
+    INSTALL_K3S_SKIP_START="true" \
+    INSTALL_K3S_CHANNEL="stable" \
+    INSTALL_K3S_SKIP_SELINUX_RPM="true" \
+    INSTALL_K3S_BIN_DIR="/usr/local/sbin" sh -
 
-# this installs a package from fedora repos
-dnf5 install -y tmux 
-
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
-
-#### Example for enabling a System Unit File
-
-systemctl enable podman.socket
+### Configure firewall rules
+firewall-offline-cmd --add-port=6443/tcp #apiserver
+firewall-offline-cmd --zone=trusted --add-source=10.42.0.0/16 #pods
+firewall-offline-cmd --zone=trusted --add-source=10.43.0.0/16 #services
+firewall-offline-cmd --set-default-zone=trusted
