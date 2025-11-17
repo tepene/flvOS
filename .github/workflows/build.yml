@@ -114,6 +114,10 @@ jobs:
             ./Containerfile
           # Postfix image name with -custom to make it a little more descriptive
           # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
+          extra-args: |
+            --cap-add=all
+            --security-opt=label=type:container_runtime_t
+            --device /dev/fuse
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
