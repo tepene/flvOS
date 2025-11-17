@@ -7,7 +7,7 @@ A custom CentOS minimal image built for tiny home labs etc.
 
 ## Features
 
-- Based on a minnimal CentOS Stream 10
+- Based on a minimal CentOS Stream 10
 - K3s lightweight Kubernetes
 
 ## Justfile Documentation
