@@ -4,6 +4,7 @@ set -eoux pipefail
 
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
+# shellcheck source=/dev/null
 source /ctx/build/font-helpers.sh
 
 echo "::group:: Install Desktop Packages"
