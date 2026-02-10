@@ -164,6 +164,13 @@ _build-bib $target_image $tag $type $config: (_rootful_load_image target_image t
     #!/usr/bin/env bash
     set -euo pipefail
 
+    build_config="$(pwd)/${config}"
+    local_build_config="$(pwd)/${config}.local"
+
+    if [ -f "${local_build_config}" ]; then
+        build_config="${local_build_config}"
+    fi
+
     args="--type ${type} "
     args+="--use-librepo=True "
     args+="--rootfs=btrfs"
@@ -177,7 +184,7 @@ _build-bib $target_image $tag $type $config: (_rootful_load_image target_image t
       --pull=newer \
       --net=host \
       --security-opt label=type:unconfined_t \
-      -v $(pwd)/${config}:/config.toml:ro \
+      -v ${build_config}:/config.toml:ro \
       -v $BUILDTMP:/output \
       -v /var/lib/containers/storage:/var/lib/containers/storage \
       "${bib_image}" \
