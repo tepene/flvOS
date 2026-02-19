@@ -1,0 +1,15 @@
+workspace "communication" {}
+
+workspace "browser" {}
+
+workspace "code" {}
+
+workspace "utils" {
+    layout {
+        // Always center a window if it's the only one here
+        always-center-single-column
+
+        // Force new windows to a specific width to help with centering
+        default-column-width { proportion 0.6; }
+    }
+}

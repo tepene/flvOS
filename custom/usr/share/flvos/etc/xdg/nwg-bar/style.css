@@ -1,0 +1,63 @@
+/* /etc/xdg/nwg-bar/style.css */
+
+/* 1. Global Reset: Kills default GTK shadows and white bevels */
+* {
+    all: unset;
+    font-family:
+        "Symbols Nerd Font Mono", "Roboto", "Helvetica", "Arial", sans-serif;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. Fullscreen Overlay (Invisible) */
+window,
+#window,
+#outer-box {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* 3. The Main Menu "Pill" */
+#inner-box {
+    /* Your requested DarkSlateGrey with high-end glass transparency */
+    background-color: rgba(47, 79, 79, 0.94);
+    border: 1px solid rgba(122, 162, 247, 0.3); /* Subtle blue border */
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px;
+    /* Soft shadow to separate from wallpaper */
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+}
+
+/* 4. Elegant Button Styling */
+button {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px;
+    margin: 12px;
+    color: #ffffff;
+}
+
+/* 5. The "Awesome" Hover Effect */
+/* No more grey/white! This uses a purple glow and lifts the button. */
+button:hover {
+    background-color: rgba(187, 154, 247, 0.18); /* Tokyo Night Purple */
+    border: 1px solid rgba(187, 154, 247, 0.6);
+    box-shadow: 0 0 20px rgba(187, 154, 247, 0.4);
+    color: #bb9af7; /* Text and icons turn purple */
+    /* Lift the button up slightly on hover */
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+/* 6. Icon and Label refinement */
+image {
+    margin-bottom: 10px;
+    /* Adds a tiny glow to the SVG icons themselves */
+    -gtk-icon-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: inherit; /* Follows the button color (white -> purple) */
+}

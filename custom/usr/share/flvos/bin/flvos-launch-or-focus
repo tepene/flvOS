@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+## source: https://github.com/basecamp/omarchy/blob/dev/bin/omarchy-launch-or-focus
+
+#  Launch or focus on a given command identified by the passed in window-pattern.
+if (($# == 0)); then
+  echo "Usage: flvos-launch-or-focus [window-pattern] [launch-command]"
+  exit 1
+fi
+
+WINDOW_PATTERN="$1"
+# Note: Using 'uwsm app' (with a space) as it's the more common command on Fedora
+LAUNCH_COMMAND="${2:-"uwsm app -- $WINDOW_PATTERN"}"
+
+# 1. Fetch windows in JSON
+# 2. Match app_id or title against the pattern (case-insensitive)
+# 3. Extract the numeric ID
+WINDOW_ID=$(niri msg -j windows | jq -r --arg p "$WINDOW_PATTERN" '
+  .[] |
+  select(
+    (.app_id // "" | test("\\b" + $p + "\\b"; "i")) or
+    (.title  // "" | test("\\b" + $p + "\\b"; "i"))
+  ) | .id' | head -n1)
+
+if [[ -n "$WINDOW_ID" ]]; then
+  # Focus the existing window
+  niri msg action focus-window --id "$WINDOW_ID"
+else
+  # Launch the application
+  eval exec setsid $LAUNCH_COMMAND
+fi

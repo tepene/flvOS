@@ -1,0 +1,82 @@
+* {
+    font-family:
+        "Symbols Nerd Font Mono", "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: rgba(
+        47,
+        79,
+        79,
+        0.7
+    ); /* DarkSlateGrey with transparency */
+    border-radius: 12px;
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}
+
+/* Individual Module Styling */
+#workspaces button {
+    padding: 0 5px;
+    color: #7aa2f7;
+    background-color: transparent;
+}
+
+#workspaces button.active {
+    color: #bb9af7;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* Capsule Grouping: Add padding and rounded corners to modules */
+#clock,
+#network,
+#bluetooth,
+#pulseaudio,
+#cpu,
+#memory,
+#battery,
+#custom-flvos,
+#custom-lock,
+#custom-power {
+    padding: 0 10px;
+    margin: 4px 2px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+/* Tooltip Styling */
+tooltip {
+    background: rgba(47, 79, 79, 0.95);
+    border: 1px solid rgba(187, 154, 247, 0.5); /* Subtle purple border */
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: #c0caf5;
+    padding: 8px;
+}
+
+/* Highlighting specific states */
+#battery.warning {
+    color: #ff9e64;
+}
+#battery.critical {
+    color: #f7768e;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f7768e;
+        color: #1a1b26;
+    }
+}
