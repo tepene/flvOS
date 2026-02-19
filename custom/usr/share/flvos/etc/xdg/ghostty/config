@@ -1,3 +1,4 @@
 # Ghostty default configuration
 
 theme = One Half Dark
+quit-after-last-window-closed = false
