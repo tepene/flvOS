@@ -28,7 +28,6 @@ mkdir -p /etc/flatpak/preinstall.d/
 cp /ctx/custom/flatpaks/*.preinstall /etc/flatpak/preinstall.d/
 
 # Copy System files
-cp -r /ctx/custom/etc/* /etc/
 cp -r /ctx/custom/usr/* /usr/
 
 echo "::endgroup::"
