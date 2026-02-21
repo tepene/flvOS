@@ -4,6 +4,15 @@ set -eoux pipefail
 
 echo "::group:: Implement Workarounds"
 
+# Link greetd default config
+## XDG_CONFIG_DIRS not supported
+rm -rf /etc/greetd
+ln -sf /usr/share/yutoriao/etc/greetd /etc/greetd
+
+# Link niri default config
+## XDG_CONFIG_DIRS not supported -> https://niri-wm.github.io/niri/Integrating-niri.html#configuration
+ln -sf /usr/share/yutoriao/etc/xdg/niri /etc/niri
+
 # Remove fuzzel default config, we have a custom one at /usr/share/yutoriao/etc/xdg/fuzzel
 rm -rf /etc/xdg/fuzzel
 
